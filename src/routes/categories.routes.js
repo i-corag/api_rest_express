@@ -1,5 +1,3 @@
-/*
-
 const { Router } = require('express');
 const validatorHandler = require('../middlewares/validatorHandler');
 const {
@@ -24,10 +22,10 @@ router.post(
   createCategory
 );
 
-//GET CATEGORIES
+//READ CATEGORIES
 router.get('/', getCategories);
 
-//GET A SPECIFIC CATEGORY
+//READ A SPECIFIC CATEGORY
 router.get('/:id', validatorHandler(getCategorySchema, 'params'), getCategory);
 
 //UPDATE CATEGORY
@@ -46,5 +44,3 @@ router.delete(
 );
 
 module.exports = router;
-
-*/
