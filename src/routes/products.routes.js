@@ -1,11 +1,9 @@
-/*
 const { Router } = require('express');
 const validatorHandler = require('../middlewares/validatorHandler');
 const {
   createProductSchema,
   updateProductSchema,
   getProductSchema,
-  queryProductSchema,
 } = require('../validationSchemas/product.schema');
 const {
   createProduct,
@@ -24,10 +22,10 @@ router.post(
   createProduct
 );
 
-//GET PRODUCTS
-router.get('/', validatorHandler(queryProductSchema, 'query'), getProducts);
+//READ PRODUCTS
+router.get('/', getProducts);
 
-//GET A SPECIFIC PRODUCT
+//READ A SPECIFIC PRODUCT
 router.get('/:id', validatorHandler(getProductSchema, 'params'), getProduct);
 
 //UPDATE PRODUCT
@@ -46,4 +44,3 @@ router.delete(
 );
 
 module.exports = router;
-*/
