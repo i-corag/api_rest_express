@@ -6,29 +6,28 @@ const {
   getUserSchema,
 } = require('../validationSchemas/user.schema');
 const {
+  createUser,
   getUsers,
   getUser,
-  createUser,
   updateUser,
   deleteUser,
 } = require('../controllers/users.controllers');
 
 const router = Router();
+//CREATE USER
+router.post('/create', validatorHandler(createUserSchema, 'body'), createUser);
 
-//GET USERS
+//READ USERS
 router.get('/', getUsers);
 
-//GET A SPECIFIC USER
+//READ A SPECIFIC USER
 router.get('/:id', validatorHandler(getUserSchema, 'params'), getUser);
-
-//CREATE USER
-router.post('/create', createUser);
 
 //UPDATE USER
 router.put(
   '/update/:id',
-  /*validatorHandler(getUserSchema, 'params'),
-  validatorHandler(updateUserSchema, 'body'),*/
+  validatorHandler(getUserSchema, 'params'),
+  validatorHandler(updateUserSchema, 'body'),
   updateUser
 );
 

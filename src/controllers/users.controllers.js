@@ -1,6 +1,17 @@
 const userService = require('../services/users.services');
 
-//GET ALL USERS
+//CREATE USER
+const createUser = async (req, res) => {
+  const user = req.body;
+  try {
+    const createdUser = await userService.createUser(user);
+    return res.status(201).send(createdUser);
+  } catch (err) {
+    return res.status(500).send('Server error: ' + err.message);
+  }
+};
+
+//READ ALL USERS
 const getUsers = async (req, res) => {
   try {
     const users = await userService.getUsers();
@@ -10,23 +21,12 @@ const getUsers = async (req, res) => {
   }
 };
 
-//GET ONE USER
+//READ ONE USER
 const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await userService.getUser(id);
     return res.status(201).send(user);
-  } catch (err) {
-    return res.status(500).send('Server error: ' + err.message);
-  }
-};
-
-//CREATE USER
-const createUser = async (req, res) => {
-  const user = req.body;
-  try {
-    const createdUser = await userService.createUser(user);
-    return res.status(201).send(createdUser);
   } catch (err) {
     return res.status(500).send('Server error: ' + err.message);
   }
@@ -49,16 +49,16 @@ const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
     await userService.deleteUser(id);
-    res.status(204).json(`the user: ${id} has been deleted`);
+    res.status(204).send('User:' + id + 'deleted');
   } catch (err) {
     return res.status(500).send('Server error: ' + err.message);
   }
 };
 
 module.exports = {
+  createUser,
   getUsers,
   getUser,
-  createUser,
   updateUser,
   deleteUser,
 };

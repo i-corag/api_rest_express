@@ -7,22 +7,11 @@ const usersData = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../database/users.json'), 'utf8')
 );
 
-const getUsers = async () => {
-  return usersData;
-};
-
-const getUser = async (id) => {
-  const user = usersData.find((x) => x.id === id);
-  if (!user) {
-    return;
-  }
-  return user;
-};
-
 const createUser = async (user) => {
   let newUser = usersData.find((x) => x.email === user.email);
   if (newUser) {
-    return;
+    const error = `The emais "${user.email}" is already registered`;
+    return error;
   } else {
     const id = crypto.randomBytes(10).toString('hex');
     const salt = bcrypt.genSaltSync(10);
@@ -41,10 +30,28 @@ const createUser = async (user) => {
   }
 };
 
+const getUsers = async () => {
+  return usersData;
+};
+
+const getUser = async (id) => {
+  const user = usersData.find((x) => x.id === id);
+  if (!user) {
+    const error = `The user ID: "${id}" does not exists`;
+    return error;
+  }
+  return user;
+};
+
 const updateUser = async (id, body) => {
   const userIndex = usersData.findIndex((x) => x.id === id);
   if (userIndex === -1) {
-    return;
+    const error = `The user ID: "${id}" does not exists`;
+    return error;
+  }
+  if (body.password) {
+    const salt = bcrypt.genSaltSync(10);
+    body.password = bcrypt.hashSync(body.password, salt);
   }
   const updatedUser = { ...usersData[userIndex], ...body };
   usersData[userIndex] = updatedUser;
@@ -58,7 +65,8 @@ const updateUser = async (id, body) => {
 const deleteUser = (id) => {
   const userIndex = usersData.findIndex((x) => x.id === id);
   if (userIndex === -1) {
-    return;
+    const error = `The user ID: "${id}" does not exists`;
+    return error;
   }
   usersData.splice(userIndex, 1);
   fs.writeFileSync(

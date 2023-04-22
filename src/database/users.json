@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "e1667ac12d58b285c581",
+    "name": "Juan",
+    "email": "ivana@gmail.com",
+    "password": "$2b$10$tDDRFrLp0vZEbAaLfpAqNOAlI1ii.9aQMO2Y.znfI2DKEkHnrEin6",
+    "address": "calle 1",
+    "phone": 123456789,
+    "role": "client",
+    "createdAt": "4/22/2023, 12:19:31 PM"
+  },
+  {
+    "id": "cdcdc26318c4719e538e",
+    "name": "Jose",
+    "email": "jose@gmail.com",
+    "password": "$2b$10$UvsGq3g7WbkKkxEydXcBYOkReguIiccnbfpu2N5P1hUQriR3Rc2ha",
+    "address": "calle 1",
+    "phone": 123456789,
+    "role": "client",
+    "createdAt": "4/22/2023, 12:20:59 PM"
+  }
+]
